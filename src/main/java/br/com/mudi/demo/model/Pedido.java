@@ -1,13 +1,28 @@
 package br.com.mudi.demo.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+
+import javax.persistence.Id;
+
+import java.time.LocalDate;
+import java.util.UUID;
+
+@Entity
 public class Pedido {
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private UUID id;
     private String nomeProduto;
     private Double valorNegociavel;
     private LocalDate dataEntrega;
+    @Column(length = 2083)
     private String urlProduto;
+    @Column(length = 2083)
     private String urlImagem;
     private String descricao;
 
@@ -18,6 +33,10 @@ public class Pedido {
         this.urlProduto = urlProduto;
         this.urlImagem = urlImagem;
         this.descricao = descricao;
+    }
+
+    public Pedido() {
+
     }
 
     public String getNomeProduto() {
