@@ -1,6 +1,7 @@
 package br.com.mudi.demo.repository;
 
 import br.com.mudi.demo.model.Pedido;
+import br.com.mudi.demo.model.StatusPedido;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,5 @@ public interface PedidoRepository extends CrudRepository<Pedido, UUID> {
     List<Pedido> findByNomeProduto(String nome);
 
 
+    List<Pedido> findByStatus(StatusPedido status);
 }

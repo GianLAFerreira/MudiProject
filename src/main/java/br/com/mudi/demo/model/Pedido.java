@@ -4,6 +4,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 
 import javax.persistence.Id;
@@ -25,6 +27,12 @@ public class Pedido {
     @Column(length = 2083)
     private String urlImagem;
     private String descricao;
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+
+
+
+
 
     public Pedido(String nomeProduto, Double valorNegociavel, LocalDate dataEntrega, String urlProduto, String urlImagem, String descricao) {
         this.nomeProduto = nomeProduto;
@@ -39,6 +47,13 @@ public class Pedido {
 
     }
 
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
+    }
     public String getNomeProduto() {
         return nomeProduto;
     }

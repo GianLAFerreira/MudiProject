@@ -1,14 +1,20 @@
 package br.com.mudi.demo.dto;
 
 import br.com.mudi.demo.model.Pedido;
+import br.com.mudi.demo.model.StatusPedido;
 
-import javax.persistence.Column;
-import java.time.LocalDate;
+import javax.validation.constraints.NotBlank;
+import javax.websocket.OnMessage;
+
 
 public class RequisicaoNovoPedido {
+    @NotBlank()
     private String nomeProduto;
+    @NotBlank
     private String urlProduto;
+    @NotBlank
     private String urlImagem;
+    @NotBlank
     private String descricao;
 
     public String getNomeProduto() {
@@ -49,6 +55,7 @@ public class RequisicaoNovoPedido {
         pedido.setUrlProduto(urlProduto);
         pedido.setUrlImagem(urlImagem);
         pedido.setDescricao(descricao);
+        pedido.setStatus(StatusPedido.AGUARDANDO);
         return pedido;
     }
 }
