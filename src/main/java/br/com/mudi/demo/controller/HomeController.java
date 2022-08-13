@@ -29,13 +29,9 @@ public class HomeController {
     @GetMapping
     public String home(Model model, Pageable principal){
 
-        Iterable<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE, PageRequest.of(0,10, Sort.by("dataEntrega").descending()));
+        Iterable<Pedido> pedidos = pedidoRepository.findByStatus(StatusPedido.ENTREGUE, PageRequest.of(0,10, Sort.by("id").descending()));
         model.addAttribute("pedidos", pedidos);
         return "home";
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String onError(){
-        return "redirect:/home";
-    }
 }
