@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.inject.Inject;
+import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,9 +24,9 @@ public class HomeController {
     PedidoRepository pedidoRepository;
 
     @GetMapping
-    public String home(Model model){
+    public String home(Model model, Principal principal){
 
-        Iterable<Pedido> pedidos = pedidoRepository.findAll();
+        Iterable<Pedido> pedidos = pedidoRepository.findAllByUserame(principal.getName());
         model.addAttribute("pedidos", pedidos);
         return "home";
     }

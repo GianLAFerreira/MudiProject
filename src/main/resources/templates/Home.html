@@ -2,17 +2,10 @@
 <html lang="pt_BR">
 <head th:replace="~{base :: head}"></head>
 <body>
-
-    <div class="logo-container mb-3 p-3 d-flex justify-content-between">
-        <span class="logo">Mudi</span>
-        <span class="login mt-3">Login</span>
-    </div>
+<div th:replace="~{base :: logo}"></div>
 
     <div class="container">
-
         <div th:replace="~{base :: titulo('Meus Pedidos')}"></div>
-
-
         <nav class="navbar navbar-expand  navbar-light bg-light d-flex justify-content-between mb-3">
             <div class="navbar-nav">
                 <a th:classappend="${status} == null ? 'active'" class="nav-item nav-link" href="/home">Todos</a>
