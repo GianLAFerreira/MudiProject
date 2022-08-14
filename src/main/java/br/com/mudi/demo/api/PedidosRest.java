@@ -17,14 +17,14 @@ import java.util.List;
 public class PedidosRest {
 
     @Inject
-    PedidoRepository pedidoRepository;
+    private PedidoRepository pedidoRepository;
 
     @GetMapping("/aguardando")
-    public List<Pedido> getPedidosAguardandoOfertas(){
-
+    public List<Pedido> getPedidosAguardandoOfertas() {
         Sort sort = Sort.by("id").descending();
         PageRequest paginacao = PageRequest.of(0, 10, sort);
 
-        return pedidoRepository.findAllByUserame("gian");
+        return pedidoRepository.findByStatus(StatusPedido.AGUARDANDO, paginacao);
     }
 }
+
