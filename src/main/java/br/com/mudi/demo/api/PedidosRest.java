@@ -19,7 +19,7 @@ public class PedidosRest {
     @Inject
     private PedidoRepository pedidoRepository;
 
-    @GetMapping("/aguardando")
+    @GetMapping("aguardando")
     public List<Pedido> getPedidosAguardandoOfertas() {
         Sort sort = Sort.by("id").descending();
         PageRequest paginacao = PageRequest.of(0, 10, sort);
