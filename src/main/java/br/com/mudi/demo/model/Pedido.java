@@ -3,6 +3,7 @@ package br.com.mudi.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,8 +13,10 @@ import javax.persistence.GeneratedValue;
 
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -30,15 +33,16 @@ public class Pedido {
     @Column(length = 2083)
     private String urlImagem;
     private String descricao;
+
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     private UserModel user;
 
-
-
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+    private List<Oferta> ofertas;
 
     public Pedido(String nomeProduto, Double valorNegociavel, LocalDate dataEntrega, String urlProduto, String urlImagem, String descricao) {
         this.nomeProduto = nomeProduto;
@@ -114,5 +118,13 @@ public class Pedido {
 
     public void setUser(UserModel user) {
         this.user = user;
+    }
+
+    public List<Oferta> getOfertas() {
+        return ofertas;
+    }
+
+    public void setOfertas(List<Oferta> ofertas) {
+        this.ofertas = ofertas;
     }
 }
