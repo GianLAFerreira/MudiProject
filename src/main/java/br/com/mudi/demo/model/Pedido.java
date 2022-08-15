@@ -42,7 +42,7 @@ public class Pedido {
     private UserModel user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
-    private List<Oferta> ofertas;
+    private List<OfertaModel> ofertas;
 
     public Pedido(String nomeProduto, Double valorNegociavel, LocalDate dataEntrega, String urlProduto, String urlImagem, String descricao) {
         this.nomeProduto = nomeProduto;
@@ -120,11 +120,11 @@ public class Pedido {
         this.user = user;
     }
 
-    public List<Oferta> getOfertas() {
+    public List<OfertaModel> getOfertas() {
         return ofertas;
     }
 
-    public void setOfertas(List<Oferta> ofertas) {
+    public void setOfertas(List<OfertaModel> ofertas) {
         this.ofertas = ofertas;
     }
 }

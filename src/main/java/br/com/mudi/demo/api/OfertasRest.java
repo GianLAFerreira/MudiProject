@@ -1,7 +1,7 @@
 package br.com.mudi.demo.api;
 
 import br.com.mudi.demo.dto.RequisicaoNovaOferta;
-import br.com.mudi.demo.model.Oferta;
+import br.com.mudi.demo.model.OfertaModel;
 import br.com.mudi.demo.model.Pedido;
 import br.com.mudi.demo.repository.PedidoRepository;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +19,7 @@ public class OfertasRest {
     private PedidoRepository pedidoRepository;
     
     @PostMapping
-    public Oferta CriaOferta(RequisicaoNovaOferta requisicao){
+    public OfertaModel CriaOferta(RequisicaoNovaOferta requisicao){
 
         Optional<Pedido> pedidoBucado = pedidoRepository.findById(requisicao.getPedidoId());
 
@@ -28,7 +28,7 @@ public class OfertasRest {
         }
         Pedido pedido = pedidoBucado.get();
 
-        Oferta nova = requisicao.toOferta();
+        OfertaModel nova = requisicao.toOferta();
         nova.setPedido(pedido);
         pedido.getOfertas().add(nova);
         pedidoRepository.save(pedido);

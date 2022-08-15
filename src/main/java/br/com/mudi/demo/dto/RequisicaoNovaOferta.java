@@ -1,10 +1,7 @@
 package br.com.mudi.demo.dto;
 
-import br.com.mudi.demo.model.Oferta;
-import org.hibernate.annotations.GenericGenerator;
+import br.com.mudi.demo.model.OfertaModel;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,8 +45,8 @@ public class RequisicaoNovaOferta {
         this.comentario = comentario;
     }
 
-    public Oferta toOferta() {
-        Oferta oferta = new Oferta();
+    public OfertaModel toOferta() {
+        OfertaModel oferta = new OfertaModel();
         oferta.setComentario(this.comentario);
         oferta.setDataEntrega(LocalDate.parse(this.dataEntrega, DateTimeFormatter.ofPattern("dd/MM/yyyy")));
         oferta.setValor(new BigDecimal(this.valor));
