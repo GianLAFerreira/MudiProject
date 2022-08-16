@@ -21,7 +21,7 @@ public class OfertaModel {
     private LocalDate dataEntrega;
     private String comentario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Pedido pedido;
 
     public UUID getId() {
@@ -58,5 +58,9 @@ public class OfertaModel {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

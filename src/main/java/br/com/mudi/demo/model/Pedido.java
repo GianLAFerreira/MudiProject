@@ -1,5 +1,6 @@
 package br.com.mudi.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -26,7 +28,7 @@ public class Pedido {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private UUID id;
     private String nomeProduto;
-    private Double valorNegociavel;
+    private BigDecimal valorNegociavel;
     private LocalDate dataEntrega;
     @Column(length = 2083)
     private String urlProduto;
@@ -37,25 +39,15 @@ public class Pedido {
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
+    @JsonIgnore
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     private UserModel user;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
     private List<OfertaModel> ofertas;
 
-    public Pedido(String nomeProduto, Double valorNegociavel, LocalDate dataEntrega, String urlProduto, String urlImagem, String descricao) {
-        this.nomeProduto = nomeProduto;
-        this.valorNegociavel = valorNegociavel;
-        this.dataEntrega = dataEntrega;
-        this.urlProduto = urlProduto;
-        this.urlImagem = urlImagem;
-        this.descricao = descricao;
-    }
-
-    public Pedido() {
-
-    }
 
     public StatusPedido getStatus() {
         return status;
@@ -72,11 +64,11 @@ public class Pedido {
         this.nomeProduto = nomeProduto;
     }
 
-    public Double getValorNegociavel() {
+    public BigDecimal getValorNegociavel() {
         return valorNegociavel;
     }
 
-    public void setValorNegociavel(Double valorNegociavel) {
+    public void setValorNegociavel(BigDecimal valorNegociavel) {
         this.valorNegociavel = valorNegociavel;
     }
 
@@ -126,5 +118,29 @@ public class Pedido {
 
     public void setOfertas(List<OfertaModel> ofertas) {
         this.ofertas = ofertas;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", nomeProduto='" + nomeProduto + '\'' +
+                ", valorNegociavel=" + valorNegociavel +
+                ", dataEntrega=" + dataEntrega +
+                ", urlProduto='" + urlProduto + '\'' +
+                ", urlImagem='" + urlImagem + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", status=" + status +
+                ", user=" + user +
+                ", ofertas=" + ofertas +
+                '}';
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
